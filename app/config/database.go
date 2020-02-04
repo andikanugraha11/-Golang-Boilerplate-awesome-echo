@@ -1,6 +1,10 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"database/sql"
+	"fmt"
+	"github.com/spf13/viper"
+)
 
 type Database struct {
 	Host     	string
@@ -8,8 +12,29 @@ type Database struct {
 	User     	string
 	Password 	string
 	Name     	string
-	MaxCon   	int
+	MaxConn   	int
 	TimeOut		int
+}
+
+func DBConnection() (*sql.DB, error) {
+	database, _ := DatabaseConfig()
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		database.Host, database.Port, database.User, database.Password, database.Name,
+	)
+
+	db, err := sql.Open("postgres", psqlInfo)
+	if err != nil {
+		return nil, err
+	}
+	if err = db.Ping(); err != nil {
+		return nil, err
+	}
+
+	maxConn := database.MaxConn
+	db.SetMaxOpenConns(maxConn)
+
+	return db, nil
 }
 
 func DatabaseConfig() (*Database, error) {
@@ -45,6 +70,17 @@ func DatabaseConfig() (*Database, error) {
 	}
 	db.Name = name
 
+	maxConn, ok := viper.Get("DB_MAX_CONN").(int)
+	if !ok {
+		maxConn = -1
+	}
+	db.MaxConn = maxConn
+
+	timeOut, ok := viper.Get("DB_TIME_OUT").(int)
+	if !ok {
+		timeOut = 0
+	}
+	db.TimeOut = timeOut
 
 	return &db, nil
 }

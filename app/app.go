@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/viper"
+	"gitlab-ci.detik.com/datacore/gonotifikasi/models"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -133,19 +134,10 @@ func main()  {
 	}
 
 	// Database Settings
-	database := config.Da
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		conf.Database.DbHost, conf.Database.DbPort,
-		conf.Database.DbUser, conf.Database.DbPassword, conf.Database.DbName,
-	)
-	db, err := models.DBConnection(psqlInfo)
+	db, err := config.DBConnection()
 	if err != nil {
-		logger.WriteError(err, nil, helper.Trace())
 		log.Panicf("Terjadi masalah pada koneksi database. %s\n", err.Error())
 	}
-	maxc := conf.Database.DbMaxCon
-	db.SetMaxOpenConns(maxc)
 
 	// API LIST
 	APIRoutes(e)
