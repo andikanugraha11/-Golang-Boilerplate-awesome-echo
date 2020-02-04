@@ -3,15 +3,15 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/config"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/andikanugraha11/golang-rest-docker-kube/config"
+	"github.com/spf13/viper"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"time"
-	"github.com/spf13/viper"
-	"log"
 )
 
 var (
