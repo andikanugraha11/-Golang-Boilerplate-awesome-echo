@@ -5,10 +5,13 @@ import (
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/andikanugraha11/golang-rest-docker-kube/config"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
+	"github.com/spf13/viper"
+	"log"
 )
 
 var (
@@ -22,13 +25,10 @@ var (
 	cyan    = string([]byte{27, 91, 57, 55, 59, 52, 54, 109})
 	reset   = string([]byte{27, 91, 48, 109})
 
-	// list of status messages (to be sent as response
-	// for e.g. [{"status_code" : 0, "response_code" : 200, "message" : "Everything's alright!"},...])
-	//statMsgData = GetJSONArrayData("status.json")
 )
 
 func main()  {
-
+	// Apps Settings
 	var appMode string
 	CLIConf := os.Args
 
@@ -57,7 +57,10 @@ func main()  {
 	// ENV Config
 	switch appMode {
 	case "DEV":
-		//	LOGGING
+		// Env File
+		viper.SetConfigFile(".env-dev")
+
+		// LOGGING
 		e.Use(middleware.BodyDump(func(c echo.Context, reqBody, resBody []byte) {
 			var reqMethod string
 			var resStatus int
@@ -111,6 +114,10 @@ func main()  {
 			)
 		}))
 	default:
+		// Env File
+		viper.SetConfigFile(".env")
+
+		// LOGGING
 		e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 			Format: fmt.Sprintf("\n[%s] | ${host} | ${time_custom} | ${status} | ${latency_human} | ${remote_ip} | ${bytes_in} bytes_in | ${bytes_out} bytes_out | ${method} | ${uri} ",
 				name,
@@ -120,10 +127,29 @@ func main()  {
 		}))
 	}
 
+	err := viper.ReadInConfig()
+	if err != nil {
+		log.Fatalf("Error while reading config file %s", err)
+	}
+
+	// Database Settings
+	database := config.Da
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		conf.Database.DbHost, conf.Database.DbPort,
+		conf.Database.DbUser, conf.Database.DbPassword, conf.Database.DbName,
+	)
+	db, err := models.DBConnection(psqlInfo)
+	if err != nil {
+		logger.WriteError(err, nil, helper.Trace())
+		log.Panicf("Terjadi masalah pada koneksi database. %s\n", err.Error())
+	}
+	maxc := conf.Database.DbMaxCon
+	db.SetMaxOpenConns(maxc)
+
 	// API LIST
 	APIRoutes(e)
 
-	//e.Logger.Printf("Running : %v",name)
 	// stores routes available in the system in a JSON file
 	data, err := json.MarshalIndent(e.Routes(), "", "  ")
 	if err != nil {
