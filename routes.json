@@ -1,0 +1,12 @@
+[
+  {
+    "method": "GET",
+    "path": "/hello",
+    "name": "main.main.func3"
+  },
+  {
+    "method": "GET",
+    "path": "/",
+    "name": "main.main.func2"
+  }
+]
