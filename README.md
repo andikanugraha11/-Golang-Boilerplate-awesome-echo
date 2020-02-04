@@ -1,1 +1,2 @@
-# -Golang-Boilerplate-awesome-echo
+# Golang-Boilerplate-awesome-echo
+Author : Andika Nugraha
