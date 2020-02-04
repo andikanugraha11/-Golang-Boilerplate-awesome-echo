@@ -1,12 +1,13 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"time"
 )
 
-func APIRoutes(e *echo.Echo) {
+func APIRoutes(e *echo.Echo, db *sql.DB) {
 	APIRoute := e.Group("/api")
 	APIv1 := APIRoute.Group("/v1")
 

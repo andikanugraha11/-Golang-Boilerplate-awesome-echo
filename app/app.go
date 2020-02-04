@@ -7,7 +7,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/viper"
-	"gitlab-ci.detik.com/datacore/gonotifikasi/models"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -140,7 +139,7 @@ func main()  {
 	}
 
 	// API LIST
-	APIRoutes(e)
+	APIRoutes(e, db)
 
 	// stores routes available in the system in a JSON file
 	data, err := json.MarshalIndent(e.Routes(), "", "  ")
