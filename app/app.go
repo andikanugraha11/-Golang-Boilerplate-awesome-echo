@@ -58,7 +58,7 @@ func main()  {
 	switch appMode {
 	case "DEV":
 		// Env File
-		viper.SetConfigFile(".env-dev")
+		viper.SetConfigFile("dev.env")
 
 		// LOGGING
 		e.Use(middleware.BodyDump(func(c echo.Context, reqBody, resBody []byte) {
@@ -115,7 +115,7 @@ func main()  {
 		}))
 	default:
 		// Env File
-		viper.SetConfigFile(".env")
+		viper.SetConfigFile("prod.env")
 
 		// LOGGING
 		e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
