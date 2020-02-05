@@ -2,23 +2,26 @@ package handler
 
 import (
 	"encoding/json"
+	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/config"
+	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository"
+	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository/dev"
 	"net/http"
 )
 
 // NewPostHandler ...
-func NewPostHandler(db *driver.DB) *Post {
-	return &Post{
-		repo: post.NewSQLPostRepo(db.SQL),
+func NewPostHandler(db *config.DB) *Dev {
+	return &Dev{
+		repo: dev.NewSQLDevRepo(db.SQL),
 	}
 }
 
 // Post ...
-type Post struct {
-	repo repository.PostRepo
+type Dev struct {
+	repo repository.DevRepo
 }
 
 // Fetch all post data
-func (p *Post) Fetch(w http.ResponseWriter, r *http.Request) {
+func (p *Dev) Fetch(w http.ResponseWriter, r *http.Request) {
 	payload, _ := p.repo.Fetch(r.Context(), 5)
 
 	respondWithJSON(w, http.StatusOK, payload)
