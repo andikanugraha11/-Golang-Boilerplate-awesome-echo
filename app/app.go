@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	dh "github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository/dev"
 	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/config"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -138,8 +139,10 @@ func main()  {
 		log.Panicf("Terjadi masalah pada koneksi database. %s\n", err.Error())
 	}
 
+	dHandler := dh.NewSQLDevRepo(db)
 	// API LIST
 	APIRoutes(e, db)
+	DevRotes(e, dHandler)
 
 	// stores routes available in the system in a JSON file
 	data, err := json.MarshalIndent(e.Routes(), "", "  ")

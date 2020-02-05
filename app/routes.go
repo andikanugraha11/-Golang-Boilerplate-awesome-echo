@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/labstack/echo/v4"
+	dRepo "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"
 	"time"
 )
 
@@ -38,4 +39,10 @@ func APIRoutes(e *echo.Echo, db *sql.DB) {
 			"idle": fmt.Sprintf("%v", dbStatus.Idle),
 		})
 	})
+}
+
+func DevRotes(e *echo.Echo, handler dRepo.DevRepo)  {
+	DevRote := e.Group("/dev")
+
+	DevRote.GET("Hll", handler.Fetch)
 }

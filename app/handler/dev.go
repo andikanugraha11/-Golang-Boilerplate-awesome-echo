@@ -23,7 +23,6 @@ type Dev struct {
 // Fetch all post data
 func (p *Dev) Fetch(w http.ResponseWriter, r *http.Request) {
 	payload, _ := p.repo.Fetch(r.Context(), 5)
-
 	respondWithJSON(w, http.StatusOK, payload)
 }
 
