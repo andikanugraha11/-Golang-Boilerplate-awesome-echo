@@ -1,6 +1,7 @@
 package dev
 
 import (
+	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/model"
 	"github.com/labstack/echo/v4"
 	"database/sql"
 
@@ -16,3 +17,8 @@ func NewSQLDevRepo(Conn *sql.DB) dRepo.DevRepo {
 type pqDevRepo struct {
 	Conn *sql.DB
 }
+
+func (p pqDevRepo) Fetch(c echo.Context, num int64) ([]*model.Dev, error) {
+	panic("implement me")
+}
+
