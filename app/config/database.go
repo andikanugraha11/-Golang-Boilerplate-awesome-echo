@@ -16,6 +16,9 @@ type Database struct {
 	MaxConn   	int
 	TimeOut		int
 }
+type DB struct {
+	SQL *sql.DB
+}
 
 func DBConnection() (*sql.DB, error) {
 	database, _ := DatabaseConfig()
