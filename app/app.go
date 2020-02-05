@@ -139,7 +139,7 @@ func main()  {
 		log.Panicf("Terjadi masalah pada koneksi database. %s\n", err.Error())
 	}
 
-	dHandler := dh.NewPostHandler(db)
+	dHandler := dh.NewDevHandler(db)
 	// API LIST
 	APIRoutes(e, db)
 	DevRotes(e, dHandler)

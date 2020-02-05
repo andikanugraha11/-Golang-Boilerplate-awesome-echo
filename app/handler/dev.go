@@ -1,17 +1,17 @@
 package handler
 
 import (
+	"database/sql"
 	"encoding/json"
-	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/config"
 	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository"
 	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository/dev"
 	"net/http"
 )
 
 // NewPostHandler ...
-func NewDevHandler(db *config.DB) *Dev {
+func NewDevHandler(db *sql.DB) *Dev {
 	return &Dev{
-		repo: dev.NewSQLDevRepo(db.SQL),
+		repo: dev.NewSQLDevRepo(db),
 	}
 }
 
