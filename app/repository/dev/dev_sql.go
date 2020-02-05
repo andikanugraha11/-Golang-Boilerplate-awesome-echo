@@ -1,6 +1,7 @@
 package dev
 
 import (
+	"context"
 	"database/sql"
 	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/model"
 	"github.com/labstack/echo/v4"
@@ -16,6 +17,10 @@ func NewSQLDevRepo(Conn *sql.DB) dRepo.DevRepo {
 
 type pqDevRepo struct {
 	Conn *sql.DB
+}
+
+func (p pqDevRepo) FetchCHI(c context.Context, num int64) ([]*model.Dev, error) {
+	panic("implement me")
 }
 
 func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) ([]*model.Dev, error) {
@@ -42,7 +47,7 @@ func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) (
 }
 
 func (p pqDevRepo) Fetch(c echo.Context, num int64) ([]*model.Dev, error) {
-	query := "Select id, title, content From posts limit ?"
+	query := "Select id, name From users limit ?"
 
 	return p.fetch(c, query, num)
 }

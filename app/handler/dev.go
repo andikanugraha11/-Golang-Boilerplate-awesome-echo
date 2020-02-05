@@ -9,7 +9,7 @@ import (
 )
 
 // NewPostHandler ...
-func NewPostHandler(db *config.DB) *Dev {
+func NewDevHandler(db *config.DB) *Dev {
 	return &Dev{
 		repo: dev.NewSQLDevRepo(db.SQL),
 	}
