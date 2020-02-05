@@ -8,5 +8,10 @@
     "method": "GET",
     "path": "/api/v1/ping-db",
     "name": "main.APIRoutes.func2"
+  },
+  {
+    "method": "GET",
+    "path": "/devHll",
+    "name": "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler.(*Dev).Fetch-fm"
   }
 ]

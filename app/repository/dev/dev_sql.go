@@ -3,7 +3,7 @@ package dev
 import (
 	"context"
 	"database/sql"
-	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/model"
+	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/model"
 	"github.com/labstack/echo/v4"
 
 	dRepo "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"

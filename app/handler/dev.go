@@ -3,8 +3,9 @@ package handler
 import (
 	"database/sql"
 	"encoding/json"
-	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository"
-	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository/dev"
+	utils "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/helper"
+	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"
+	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository/dev"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )
@@ -22,7 +23,7 @@ type Dev struct {
 }
 
 // Fetch all post data
-func (p *Dev) Fetch(c echo.Context) {
+func (p *Dev) Fetch(c echo.Context) error {
 	payload, _ := p.repo.Fetch(c, 5)
 	response := utils.JsonResponse(true,"success", payload)
 	return c.JSON(http.StatusOK, response)

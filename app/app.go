@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	dh "github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/handler"
 	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/config"
+	dh "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/viper"

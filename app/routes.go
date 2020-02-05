@@ -3,8 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler"
 	"github.com/labstack/echo/v4"
-	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/handler"
 	"time"
 )
 
