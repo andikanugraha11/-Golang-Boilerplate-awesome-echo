@@ -28,4 +28,14 @@ func APIRoutes(e *echo.Echo, db *sql.DB) {
 			"server_type": "Testing",
 		})
 	})
+
+	APIv1.GET("/ping-db", func(c echo.Context) error {
+		dbStatus := db.Stats()
+		return c.JSON(200, map[string]string{
+			"pong": fmt.Sprintf("%v", db.Ping()),
+			"openConnection": fmt.Sprintf("%v", dbStatus.OpenConnections),
+			"inUse": fmt.Sprintf("%v", dbStatus.InUse),
+			"idle": fmt.Sprintf("%v", dbStatus.Idle),
+		})
+	})
 }

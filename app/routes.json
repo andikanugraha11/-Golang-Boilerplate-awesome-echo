@@ -3,5 +3,10 @@
     "method": "GET",
     "path": "/api/v1",
     "name": "main.APIRoutes.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ping-db",
+    "name": "main.APIRoutes.func2"
   }
 ]
