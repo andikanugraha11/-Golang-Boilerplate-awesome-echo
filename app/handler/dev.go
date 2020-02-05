@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository"
 	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/repository/dev"
+	"github.com/labstack/echo/v4"
 	"net/http"
 )
 
@@ -21,9 +22,10 @@ type Dev struct {
 }
 
 // Fetch all post data
-func (p *Dev) Fetch(w http.ResponseWriter, r *http.Request) {
-	payload, _ := p.repo.Fetch(r.Context(), 5)
-	respondWithJSON(w, http.StatusOK, payload)
+func (p *Dev) Fetch(c echo.Context) {
+	payload, _ := p.repo.Fetch(c, 5)
+	response := utils.JsonResponse(true,"success", payload)
+	return c.JSON(http.StatusOK, response)
 }
 
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
