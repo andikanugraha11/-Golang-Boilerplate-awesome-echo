@@ -1,10 +1,9 @@
 package dev
 
 import (
-	"context"
 	"database/sql"
 	"github.com/andikanugraha11/Golang-Boilerplate-awesome-echo/app/model"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 
 	dRepo "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"
 )
@@ -19,8 +18,8 @@ type pqDevRepo struct {
 	Conn *sql.DB
 }
 
-func (p pqDevRepo) fetch(ctx context.Context, query string, args ... interface{}) ([]*model.Dev, error) {
-	rows, err := p.Conn.QueryContext(ctx, query, args)
+func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) ([]*model.Dev, error) {
+	rows, err := p.Conn.Query(query, args)
 	if err != nil {
 		return nil, err
 	}
