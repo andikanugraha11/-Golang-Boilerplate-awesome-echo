@@ -6,7 +6,6 @@ import (
 	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/model"
 	dRepo "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"
 	"github.com/labstack/echo/v4"
-	"log"
 )
 
 func NewSQLDevRepo(Conn *sql.DB) dRepo.DevRepo {
@@ -23,15 +22,12 @@ func (p pqDevRepo) FetchCHI(c context.Context, num int64) ([]*model.Dev, error) 
 	panic("implement me")
 }
 
-func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) ([]*model.Dev, error) {
-	rows, err := p.Conn.Query(query, args)
+func (p pqDevRepo) fetch(c echo.Context, query string, args ... interface{}) ([]*model.Dev, error) {
+	rows, err := p.Conn.QueryContext(c.Request().Context(),query, args...)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	log.Println(query)
-	log.Println(rows)
-	log.Println(err)
 	payload := make([]*model.Dev, 0)
 	for rows.Next() {
 		data := new(model.Dev)
@@ -39,6 +35,9 @@ func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) (
 		err := rows.Scan(
 			&data.ID,
 			&data.Name,
+			&data.Email,
+			&data.Username,
+			&data.Password,
 		)
 		if err != nil {
 			return nil, err
@@ -49,7 +48,7 @@ func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) (
 }
 
 func (p pqDevRepo) Fetch(c echo.Context, num int64) ([]*model.Dev, error) {
-	query := "Select id, name From users limit ?"
+	query := "Select id, name, email, username, password From users limit $1"
 
 	return p.fetch(c, query, num)
 }
