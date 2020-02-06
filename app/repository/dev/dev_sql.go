@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/model"
-	"github.com/labstack/echo/v4"
-
 	dRepo "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"
+	"github.com/labstack/echo/v4"
+	"log"
 )
 
 func NewSQLDevRepo(Conn *sql.DB) dRepo.DevRepo {
@@ -29,7 +29,9 @@ func (p pqDevRepo) fetch(ctx echo.Context, query string, args ... interface{}) (
 		return nil, err
 	}
 	defer rows.Close()
-
+	log.Println(query)
+	log.Println(rows)
+	log.Println(err)
 	payload := make([]*model.Dev, 0)
 	for rows.Next() {
 		data := new(model.Dev)

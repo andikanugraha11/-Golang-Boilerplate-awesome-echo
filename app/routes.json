@@ -1,6 +1,16 @@
 [
   {
     "method": "GET",
+    "path": "/dev/hll",
+    "name": "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler.(*Dev).Fetch-fm"
+  },
+  {
+    "method": "GET",
+    "path": "/dev/hhh",
+    "name": "main.DevRoutes.func1"
+  },
+  {
+    "method": "GET",
     "path": "/api/v1",
     "name": "main.APIRoutes.func1"
   },
@@ -11,7 +21,12 @@
   },
   {
     "method": "GET",
-    "path": "/devHll",
-    "name": "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler.(*Dev).Fetch-fm"
+    "path": "/test/v1",
+    "name": "main.TestRoutes.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/test/v1/ping-db",
+    "name": "main.TestRoutes.func2"
   }
 ]

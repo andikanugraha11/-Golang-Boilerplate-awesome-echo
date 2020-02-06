@@ -141,8 +141,10 @@ func main()  {
 
 	dHandler := dh.NewDevHandler(db)
 	// API LIST
+	DevRoutes(e, dHandler)
 	APIRoutes(e, db)
-	DevRotes(e, dHandler)
+	TestRoutes(e, db)
+
 
 	// stores routes available in the system in a JSON file
 	data, err := json.MarshalIndent(e.Routes(), "", "  ")
