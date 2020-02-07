@@ -22,11 +22,16 @@ type Dev struct {
 	repo repository.DevRepo
 }
 
-// Fetch all post data
+// Fetch all data
 func (p *Dev) Fetch(c echo.Context) error {
 	payload, _ := p.repo.Fetch(c, 5)
 	response := utils.JsonResponse(true,"success", payload)
 	return c.JSON(http.StatusOK, response)
+}
+
+// Update data
+func (p *Dev) Update(c echo.Context, id int64) error {
+	payload, _ := p.repo.
 }
 
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {

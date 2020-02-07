@@ -31,7 +31,6 @@ func (p pqDevRepo) fetch(c echo.Context, query string, args ... interface{}) ([]
 	payload := make([]*model.Dev, 0)
 	for rows.Next() {
 		data := new(model.Dev)
-
 		err := rows.Scan(
 			&data.ID,
 			&data.Name,
