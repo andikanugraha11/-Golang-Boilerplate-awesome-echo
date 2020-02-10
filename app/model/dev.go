@@ -1,9 +1,9 @@
 package model
 
 type Dev struct {
-	ID			int64 `json:"id"`
-	Name 		string `json:"name"`
-	Email 		string `json:"email"`
-	Username	string `json:"username"`
-	Password 	string `json:"password"`
+	ID			int64 	`json:"id,omitempty"`
+	Name 		string 	`json:"name,omitempty"`
+	Email 		string 	`json:"email,omitempty"`
+	Username	string 	`json:"username,omitempty"`
+	Password 	string 	`json:"password,omitempty"`
 }

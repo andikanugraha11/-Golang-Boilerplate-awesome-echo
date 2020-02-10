@@ -18,6 +18,10 @@ type pqDevRepo struct {
 	Conn *sql.DB
 }
 
+func (p pqDevRepo) UpdateById(c echo.Context, data *model.Dev) (*model.Dev, error) {
+	return data, nil
+}
+
 func (p pqDevRepo) FetchCHI(c context.Context, num int64) ([]*model.Dev, error) {
 	panic("implement me")
 }

@@ -9,11 +9,10 @@ import (
 )
 
 func DevRoutes(e *echo.Echo, handler *handler.Dev) {
-	// TODO : Fix typo
-	DevRote := e.Group("/dev")
-
-	DevRote.GET("/hll", handler.Fetch)
-	DevRote.GET("/hhh", func(c echo.Context) error {
+	DevRoute := e.Group("/dev")
+	DevRoute.GET("/update", handler.Update)
+	DevRoute.GET("/fetch", handler.Fetch)
+	DevRoute.GET("/hhh", func(c echo.Context) error {
 		req := c.Request()
 		res := c.Response()
 		return c.JSON(200, map[string]string{
