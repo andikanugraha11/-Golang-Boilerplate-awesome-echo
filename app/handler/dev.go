@@ -31,16 +31,18 @@ func (p *Dev) Fetch(c echo.Context) error {
 }
 
 // Update data
-func (p *Dev) Update(c echo.Context) error {
-
-	//err := p.repo.UpdateById(c, id)
+func (p *Dev) UpdateById(c echo.Context) error {
 	dev := new(model.Dev)
-	payload, _ := p.Update(c, )
 	if err := c.Bind(dev); err != nil{
-		response := utils.JsonResponse(false,"fail", dev)
+		response := utils.JsonResponse(false,"fail",nil)
 		return c.JSON(http.StatusBadRequest, response)
 	}
-	response := utils.JsonResponse(true,"success", dev)
+	err := p.repo.UpdateById(dev.ID, dev)
+	if err != nil {
+		response := utils.JsonResponse(false,"fail", nil)
+		return c.JSON(http.StatusOK, response)
+	}
+	response := utils.JsonResponse(true,"success", map[string]string{"message": "Successfully Update By Id"})
 	return c.JSON(http.StatusOK, response)
 }
 

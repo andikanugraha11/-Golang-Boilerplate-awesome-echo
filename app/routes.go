@@ -10,7 +10,7 @@ import (
 
 func DevRoutes(e *echo.Echo, handler *handler.Dev) {
 	DevRoute := e.Group("/dev")
-	DevRoute.GET("/update", handler.Update)
+	DevRoute.POST("/update", handler.UpdateById)
 	DevRoute.GET("/fetch", handler.Fetch)
 	DevRoute.GET("/hhh", func(c echo.Context) error {
 		req := c.Request()

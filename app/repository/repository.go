@@ -9,5 +9,5 @@ import (
 type DevRepo interface {
 	FetchCHI(c context.Context, num int64) ([]*model.Dev, error)
 	Fetch(c echo.Context, num int64) ([]*model.Dev, error)
-	UpdateById(c echo.Context, data *model.Dev) (*model.Dev, error)
+	UpdateById(id int64, data *model.Dev) error
 }

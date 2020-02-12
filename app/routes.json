@@ -1,23 +1,8 @@
 [
   {
-    "method": "GET",
-    "path": "/api/v1/ping-db",
-    "name": "main.APIRoutes.func2"
-  },
-  {
-    "method": "GET",
-    "path": "/test/v1",
-    "name": "main.TestRoutes.func1"
-  },
-  {
-    "method": "GET",
-    "path": "/test/v1/ping-db",
-    "name": "main.TestRoutes.func2"
-  },
-  {
-    "method": "GET",
+    "method": "POST",
     "path": "/dev/update",
-    "name": "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler.(*Dev).Update-fm"
+    "name": "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler.(*Dev).UpdateById-fm"
   },
   {
     "method": "GET",
@@ -33,5 +18,20 @@
     "method": "GET",
     "path": "/api/v1",
     "name": "main.APIRoutes.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ping-db",
+    "name": "main.APIRoutes.func2"
+  },
+  {
+    "method": "GET",
+    "path": "/test/v1",
+    "name": "main.TestRoutes.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/test/v1/ping-db",
+    "name": "main.TestRoutes.func2"
   }
 ]
