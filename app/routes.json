@@ -1,10 +1,5 @@
 [
   {
-    "method": "GET",
-    "path": "/test/v1/ping-db",
-    "name": "main.TestRoutes.func2"
-  },
-  {
     "method": "POST",
     "path": "/dev/update",
     "name": "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/handler.(*Dev).UpdateById-fm"
@@ -33,5 +28,10 @@
     "method": "GET",
     "path": "/test/v1",
     "name": "main.TestRoutes.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/test/v1/ping-db",
+    "name": "main.TestRoutes.func2"
   }
 ]

@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	utils "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/helper"
 	"github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/model"
 	dRepo "github.com/andikanugraha11/golang-boilerplate-awesome-echo/app/repository"
 	"github.com/labstack/echo/v4"
@@ -24,15 +25,16 @@ func (p pqDevRepo) update(query string, set, where []string, args ... interface{
 	return err
 }
 
-func (p pqDevRepo) UpdateById(id int64, data *model.Dev) error {
+func (p pqDevRepo) UpdateById(id int, data *model.Dev) error {
 
 	query := "UPDATE users"
-	fmt.Println(query)
+	tes1, tes2 := utils.DynamicQuery(*data, "")
+	fmt.Println(tes1, tes2)
 	new := []string{"A","B"}
 	return p.update(query, []string{"A"}, []string{"B"}, new)
 }
 
-func (p pqDevRepo) FetchCHI(c context.Context, num int64) ([]*model.Dev, error) {
+func (p pqDevRepo) FetchCHI(c context.Context, num int) ([]*model.Dev, error) {
 	panic("implement me")
 }
 
@@ -60,7 +62,7 @@ func (p pqDevRepo) fetch(c echo.Context, query string, args ... interface{}) ([]
 	return payload, nil
 }
 
-func (p pqDevRepo) Fetch(c echo.Context, num int64) ([]*model.Dev, error) {
+func (p pqDevRepo) Fetch(c echo.Context, num int) ([]*model.Dev, error) {
 	query := "SELECT id, name, email, username, password FROM users LIMIT $1"
 	return p.fetch(c, query, num)
 }

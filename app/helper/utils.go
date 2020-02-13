@@ -14,19 +14,19 @@ func DynamicWhere() error {
 
 func DynamicQuery(data interface{}, exclude interface{}) ([]interface{},[]interface{}) {
 	var args, column []interface{}
-
 	rv := reflect.ValueOf(data)
 	for i := 0; i < rv.NumField(); i++ {
 		f := rv.Field(i)
 		col := rv.Type().Field(i).Tag.Get("col")
-		if !f.IsValid() || f.String() == "" || f.Int() == 0{
+
+		if !f.IsValid() || (f.Kind() == reflect.Int && f.Int() == 0) || (f.Kind() == reflect.String && f.String() == ""){
 			continue
 		}
 
+		column = append(column, col)
 		v := f.Interface()
 		args = append(args, v)
-		column = append(column, col)
 	}
 
-	return args, column
+	return column, args
 }
